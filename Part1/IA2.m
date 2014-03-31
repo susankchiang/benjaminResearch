@@ -17,7 +17,7 @@ for i=0:10
     tbl(toString(i)) = sum(countHeads==i)/c; %realized probability
 end
 
-tblToFile(tbl,'IA2A_10flips.dat'); %Or do we want this in one file?
+tblToFile(tbl,'IA2A_10flips.dat');
 
 %Part B
 keys = {'0-3','4','5','6','7-10'};

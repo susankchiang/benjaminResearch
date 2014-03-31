@@ -2,7 +2,10 @@
 %Calculates the realized probabilities of there being 0,1,...,10 heads
 %among all the trials
 
-function IB1(M)
+function IB1
+load 1000flips.mat
+M = flips;
+
 %Count the number of instances of 0,1,...,10 heads
 h = sum(M,1); %sums the columns
 

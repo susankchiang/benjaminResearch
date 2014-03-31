@@ -10,4 +10,4 @@ ran = rand(10^3,10^6);
 flips = round(ran);
 
 %Save data into a file
-% dlmwrite('1000flips.dat',flips);
+save('1000flips.mat','flips');
