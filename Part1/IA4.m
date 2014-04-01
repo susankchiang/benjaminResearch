@@ -18,14 +18,22 @@ y_t = 1:c;
 
 for i=1:6
     %Heads
-    probs(i) = sum(M(ranJ_h(i),y))/length(y);
-    y = find(M(ranJ_h(i),y)); %Only consider for the next round the columns 
-                              %where there was a head
+    if(isempty(y))
+        probs(i)=0;
+    else
+        probs(i) = sum(M(ranJ_h(i),y))/length(y);
+        y = find(M(ranJ_h(i),y)); %Only consider for the next round the columns 
+                                  %where there was a head
+    end
                               
     %Tails
-    probs_t(i) = (length(y_t) - sum(M(ranJ_t(i),y_t)))/length(y_t);
-    y_t = find(M(ranJ_t(i),y_t)==0); %Only consider for the next round the 
-                                     %columns where there was a tail
+    if(isempty(y_t))
+        probs_t(i)=0;
+    else
+        probs_t(i) = (length(y_t) - sum(M(ranJ_t(i),y_t)))/length(y_t);
+        y_t = find(M(ranJ_t(i),y_t)==0); %Only consider for the next round the 
+                                         %columns where there was a tail
+    end
 end
 
 save('IA4_results.mat', 'probs', 'probs_t');
