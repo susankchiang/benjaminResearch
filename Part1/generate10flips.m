@@ -10,4 +10,4 @@ ran = rand(10,10^6);
 flips = round(ran);
 
 %Save data into a file
-dlmwrite('10flips.dat',flips);
+save('10flips.mat','flips');

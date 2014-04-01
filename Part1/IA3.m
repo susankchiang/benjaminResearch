@@ -2,7 +2,10 @@
 %Produces the probability of the next flip being heads given all the
 %previous flips are heads
 
-function IA3(M)
+function IA3
+    load('10flips.mat');
+    M = flips;
+
     [r,~] = size(M);
     
     %The probabilities given a streak of i heads
@@ -13,6 +16,7 @@ function IA3(M)
     
     %Write to file
     dlmwrite('IA3_10flips.dat',x);
+    
 end
 
 %Precondition: j is in interval [1,number of flips)

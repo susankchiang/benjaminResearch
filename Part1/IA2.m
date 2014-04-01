@@ -2,7 +2,9 @@
 %Calculates the realized probabilities of there being 0,1,...,10 heads
 %among all the trials
 
-function IA2(M)
+function IA2
+load('10flips.mat');
+M = flips;
 [~,c] = size(M);
 
 %Count the number of instances of 0,1,...,10 heads

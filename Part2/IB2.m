@@ -1,10 +1,42 @@
 %I.B.2
 %Produces the probability of the next flip being heads given all the
 %previous flips are heads. The index to start at is predetermined
+function IB2
 load 1000flips.mat;
 load IB2.mat;
+M = flips;
+[~,c] = size(M);
+ranJ_h = IB2Heads;
+ranJ_t = IB2Tails;
+n = length(ranJ_h); 
 
-heads = getCounts(1, IB2Heads);
-tails = getCounts(0, IB2Tails);
+prob_h = zeros(10,n);
+prob_t = zeros(10,n);
+                       
+for i=1:n
+    x_h = 1:c; %Denotes the trials we want to consider at each step
+    x_t = 1:c;
+    for j = 0:9
+        %Heads
+        if(isempty(x_h))
+            prob_h(j+1,i) = 0;
+        else
+            prob_h(j+1,i) = sum(M(ranJ_h(i)+j,x_h))/length(x_h);  
+            x_h = find(M(ranJ_h(i)+j,x_h)); %Only consider for the next 
+                                            %round the columns 
+                                             %where there was a head
+        end
+        
+        %Tails
+        if(isempty(x_t))
+            prob_t(j+1,i) = 0;
+        else
+            prob_t(j+1,i) = (length(x_t) - sum(M(ranJ_t(i)+j,x_t)))/length(x_t);
+            x_t = find(M(ranJ_t(i)+j,x_t)==0);%Only consider for the next 
+                                              %round the columns 
+                                              %where there was a tail
+        end
+    end
+end
 
-save('IB2_results.mat', 'heads', 'tails');
+save('IB2_results.mat', 'prob_h', 'prob_t');

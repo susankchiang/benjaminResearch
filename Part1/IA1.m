@@ -4,15 +4,14 @@
 %1,2,..., q-1 and the corresponding probability of the qth flip being
 %heads (value = 1) is produced
 
-function IA1(M, q) 
-
-%Reads generated flips... Work on reading from a file
-% M = dlmread('10flips.dat',','); %NOTE: If I do end up having to do all q, then do this on a level above
+function IA1(q) 
+load('10flips.mat');
+M = flips;
 [~,c] = size(M);
 tbl = containers.Map;
 
 %Maps to each 1,...,1-q flips, a list of all the qth flip realizations...
-for i=1:c %NOTE: Can I vectorize this?
+for i=1:c 
     if q<=1
         key = '[]'; %When q = 1, there are no previous flips
     else
