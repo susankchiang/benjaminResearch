@@ -15,8 +15,7 @@ function IA3
     end
     
     %Write to file
-    dlmwrite('IA3_10flips.dat',x);
-    
+    save('IA3_results.mat','x');    
 end
 
 %Precondition: j is in interval [1,number of flips)

@@ -41,7 +41,6 @@ for h=1:10^3
         c2_t = 1:step;
         for j = 0:9
             %Heads
-            M(ran2H(i)+j,c2_h);
             c2Countsh(i,j+1) = sum(M(ran2H(i)+j,c2_h));
             c2Numsh(i,j+1) = length(c2_h);
             c2_h = find(M(ran2H(i)+j,c2_h)); %Only consider for the next 
@@ -101,14 +100,14 @@ tblToFile(tbl3,'IC1C.dat');
 
 
 %I.C.2
-c2Heads = c2Countsh ./ c2Numsh; %Probabilities 
-c2Tails = c2Countst ./ c2Numst;
-save('IC2_results.mat','c2Heads', 'c2Tails');
+IC2H = c2Countsh ./ c2Numsh; %Probabilities 
+IC2T = c2Countst ./ c2Numst;
+save('IC2_results.mat','IC2H', 'IC2T');
 
 %I.C.3
-c3Heads = c3Datah(:,1) ./ c3Datah(:,2); %Probabilities
-c3Tails = c3Datat(:,1) ./ c3Datat(:,2);
-save('IC3_results.mat','c3Heads', 'c3Tails');
+IC3H = c3Datah(:,1) ./ c3Datah(:,2); %Probabilities
+IC3T = c3Datat(:,1) ./ c3Datat(:,2);
+save('IC3_results.mat','IC3H', 'IC3T');
 
 end
 
