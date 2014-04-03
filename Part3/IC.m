@@ -9,7 +9,7 @@ s2 = length(IC2Heads);
 ran3H = IC3Heads;
 ran3T = IC3Tails;
 s3 = length(IC3Heads);
-c = 200; %The number of trials. 
+c = 10^6; %The number of trials. 
 
 %Initialize variables 
 %I.C.1
@@ -41,15 +41,16 @@ for h=1:10^3
         c2_t = 1:step;
         for j = 0:9
             %Heads
-            c2Countsh(i,j+1) = sum(M(ran2H(i)+j,c2_h));
-            c2Numsh(i,j+1) = length(c2_h);
+            c2Countsh(i,j+1) = c2Countsh(i,j+1) + sum(M(ran2H(i)+j,c2_h));
+            c2Numsh(i,j+1) = c2Numsh(i,j+1) + length(c2_h);
             c2_h = find(M(ran2H(i)+j,c2_h)); %Only consider for the next 
                                              %round the columns 
                                              %where there was a head
 
             %Tails
-            c2Countst(i,j+1) = length(c2_t) - sum(M(ran2T(i)+j,c2_t));
-            c2Numst(i,j+1) = length(c2_t);
+            c2Countst(i,j+1) = c2Countst(i,j+1)+ length(c2_t) - ...
+                               sum(M(ran2T(i)+j,c2_t));
+            c2Numst(i,j+1) = c2Numst(i,j+1) + length(c2_t);
             c2_t = find(M(ran2T(i)+j,c2_t)==0);%Only consider for the next 
                                                %round the columns 
                                                %where there was a tail
@@ -62,14 +63,15 @@ for h=1:10^3
 
     for i=1:6
         %Heads
-        c3Datah(i,1) = sum(M(ran3H(i),c3_h));
-        c3Datah(i,2) = length(c3_h);
+        c3Datah(i,1) = c3Datah(i,1) + sum(M(ran3H(i),c3_h));
+        c3Datah(i,2) = c3Datah(i,2) + length(c3_h);
         c3_h = find(M(ran3H(i),c3_h)); %Only consider for the next round the columns 
                                        %where there was a head
 
         %Tails
-        c3Datat(i,1) = (length(c3_t) - sum(M(ran3T(i),c3_t)));
-        c3Datat(i,2) = length(c3_t);
+        c3Datat(i,1) = c3Datat(i,1) + (length(c3_t) - ...
+                       sum(M(ran3T(i),c3_t)));
+        c3Datat(i,2) = c3Datat(i,2) + length(c3_t);
         c3_t = find(M(ran3T(i),c3_t)==0); %Only consider for the next round the 
                                           %columns where there was a tail
     end
