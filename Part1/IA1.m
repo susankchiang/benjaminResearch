@@ -1,5 +1,5 @@
 %I.A.1
-%Precondition: q is an integer in the interval [1,10)
+%Precondition: q is an integer in the interval [1,10]
 %Given q, a table of all possible head/ tail combinations for flips 
 %1,2,..., q-1 and the corresponding probability of the qth flip being
 %heads (value = 1) is produced
@@ -37,3 +37,4 @@ for i=1:length(ks)
 end
 
 tblToFile(tbl, strcat('IA1_',int2str(q),'_10flips.dat'));
+save(strcat('IA1_',int2str(q),'_results.mat'), 'tbl');
